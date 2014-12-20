@@ -4,6 +4,12 @@ describe Bumper::Configuration do
   subject { described_class.configure!(options) }
 
   context 'when raise error ProjectNotSet' do
-    it { expect { subject }.to raise_error }
+    it { expect { subject }.to raise_error(Bumper::Configuration::ProjectNotSet) }
+  end
+
+  context 'when valid project' do
+    let(:options) { { project: 'cashier' } }
+
+    it { should eq options }
   end
 end
