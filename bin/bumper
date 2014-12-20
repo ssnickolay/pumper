@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'optparse'
-require_relative '../lib/bumper/configuration'
+require 'bumper'
 
 options = Hash.new
 
@@ -14,4 +14,6 @@ end
 
 opts.parse!
 
-options = Bumper::Configuration.configure!(options)
+Bumper::Bump.perform(
+  Bumper::Configuration.configure!(options)
+)

@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Nikolay Sverchkov']
   s.email       = ['ssnikolay@gmail.com']
   s.homepage    = 'https://github.com/ssnikolay/bumper'
-  s.summary     = 'Gem for bump another gems to dependent projects'
-  s.description = 'Gem for bump another gems to dependent projects'
+  s.summary     = 'Gem for move another gems to dependent projects'
+  s.description = 'Gem for move another gems to dependent projects'
 
   s.rubyforge_project = 'bumper'
 
