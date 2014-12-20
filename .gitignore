@@ -1,0 +1,6 @@
+coverage/*
+.bundle
+.idea
+.DS_Store
+pkg
+log
