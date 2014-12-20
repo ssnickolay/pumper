@@ -4,7 +4,7 @@ require 'bumper/version'
 
 Gem::Specification.new do |s|
   s.name        = 'bumper'
-  s.version     = OmgDatabase::VERSION
+  s.version     = Bumper::VERSION.dup
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Nikolay Sverchkov']
   s.email       = ['ssnikolay@gmail.com']
