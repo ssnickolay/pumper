@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require_relative '../lib/bumper/configuration'
+
+options = Hash.new
+
+opts = OptionParser.new do |opts|
+  opts.banner = %q[Bumper]
+
+  opts.on('-p', '--project PROJECT_PATH', 'Set path to gem bump project') do |project|
+    options[:project] = project
+  end
+end
+
+opts.parse!
+
+options = Bumper::Configuration.configure!(options)
