@@ -10,6 +10,6 @@ describe Bumper::Configuration do
   context 'when valid project' do
     let(:options) { { project: 'cashier' } }
 
-    it { should eq options }
+    it { is_expected.to eq(options) }
   end
 end
