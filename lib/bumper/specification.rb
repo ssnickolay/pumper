@@ -9,6 +9,10 @@ module Bumper
       "gem '#{ name }', '~> #{ version }'"
     end
 
+    def gem_file_name
+      "#{ name }-#{ version }.gem"
+    end
+
     def version
       super.to_s
     end
