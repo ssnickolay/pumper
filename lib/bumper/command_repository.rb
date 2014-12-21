@@ -12,11 +12,11 @@ module Bumper
 
     def run!
       @cmds.each do |cmd|
-        puts ">> #{ cmd }"
+        puts(cmd)
         system(cmd)
       end
 
-      puts "Success bump current gem to #{ @project }"
+      puts "Success bump current gem in #{ @project }"
     end
 
     def debug
@@ -26,8 +26,8 @@ module Bumper
     private
 
     def init_cmds
-       add('rm -rf pkg')
-       add('rake build')
+      add('rm -rf pkg')
+      add('rake build')
     end
   end
 end
