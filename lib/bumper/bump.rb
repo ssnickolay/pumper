@@ -10,15 +10,10 @@ module Bumper
       projects = Array(options[:project])
 
       projects.each do |project|
-        system("cp pkg/* ../#{ project }/vendor/cache")
-        #gemfile = File.join(Dir.pwd, "../#{ project }/Gemfile")
-        text = File.read(gemfile)
-        File.open(gemfile, 'w') do |file|
-          file.puts(
-            text.gsub(/gem '#{ specification.name }'.*/, "gem '#{ specification.name }', '~> #{ specification.version }'")
-          )
-        end
+        gemfile = ProjectGemfile.new(project, options[:absolute_path])
+        gemfile.bump_version!(Specification.new(options[:gemspec]))
 
+        system("cp pkg/* ../#{ project }/vendor/cache")
         puts "copied to #{ project }"
       end
     end
@@ -26,13 +21,5 @@ module Bumper
     private
 
     attr_reader :options
-
-    def specification
-      @specification ||= Specification.new(options[:gemspec])
-    end
-
-    def gemfile
-      @gemfile ||= ProjectGemfile.new(project)
-    end
   end
 end
