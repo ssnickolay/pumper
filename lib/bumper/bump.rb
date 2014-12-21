@@ -11,7 +11,7 @@ module Bumper
 
       projects.each do |project|
         system("cp pkg/* ../#{ project }/vendor/cache")
-        gemfile = File.join(Dir.pwd, "../#{ project }/Gemfile")
+        #gemfile = File.join(Dir.pwd, "../#{ project }/Gemfile")
         text = File.read(gemfile)
         File.open(gemfile, 'w') do |file|
           file.puts(
@@ -29,6 +29,10 @@ module Bumper
 
     def specification
       @specification ||= Specification.new(options[:gemspec])
+    end
+
+    def gemfile
+      @gemfile ||= ProjectGemfile.new(project)
     end
   end
 end

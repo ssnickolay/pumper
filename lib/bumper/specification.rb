@@ -5,6 +5,14 @@ module Bumper
       super(eval(specification))
     end
 
+    def for_gemfile
+      "gem '#{ name }', '~> #{ version }'"
+    end
+
+    def version
+      super.to_s
+    end
+
     private
 
     def gemspec_file(gemspec)

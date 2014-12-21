@@ -4,5 +4,6 @@ describe Bumper::Specification do
   subject { described_class.new(gemspec) }
 
   its(:name) { is_expected.to eq('simple_gem') }
-  its('version.to_s') { is_expected.to eq('1.2.3') }
+  its(:version) { is_expected.to eq('1.2.3') }
+  its(:for_gemfile) { is_expected.to eq("gem 'simple_gem', '~> 1.2.3'") }
 end
