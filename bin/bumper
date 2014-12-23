@@ -14,6 +14,10 @@ opts = OptionParser.new do |opts|
   opts.on('-g', '--gemspec GEMSPEC_PATH', 'Set path to gemspec') do |gemspec|
     options[:gemspec] = gemspec
   end
+
+  opts.on('-e', '--vendor', 'If need add to vendor path') do
+    options[:vendor] = true
+  end
 end
 
 opts.parse!

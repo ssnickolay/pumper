@@ -1,8 +1,9 @@
 require 'ostruct'
 describe Bumper::Bump do
-  let(:options) { { project: 'simple_project'} }
+  let(:options) { Hash.new }
+  let(:default_options) { { project: 'simple_project' } }
 
-  let(:bumper) { described_class.new(options) }
+  let(:bumper) { described_class.new(options.merge(default_options)) }
   let(:specification) do
     OpenStruct.new(
       name: 'simple_gem',
@@ -27,6 +28,22 @@ describe Bumper::Bump do
             rake build
             gem cleanup simple_gem
             gem install ./simple_gem-1.0.gem
+          output
+        )
+      end
+    end
+
+    context 'when simple options' do
+      let(:options) { { vendor: true } }
+
+      it 'should print vendor commands' do
+        should eq(
+          <<-output.strip_heredoc.strip
+            rm -rf pkg
+            rake build
+            gem cleanup simple_gem
+            cp pkg/* ../simple_project/vendor/cache
+            cd ../simple_project && bundle install --local
           output
         )
       end
