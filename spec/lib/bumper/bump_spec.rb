@@ -33,7 +33,7 @@ describe Bumper::Bump do
       end
     end
 
-    context 'when simple options' do
+    context 'when vendor options' do
       let(:options) { { vendor: true } }
 
       it 'should print vendor commands' do
@@ -44,6 +44,23 @@ describe Bumper::Bump do
             gem cleanup simple_gem
             cp pkg/* ../simple_project/vendor/cache
             cd ../simple_project && bundle install --local
+          output
+        )
+      end
+    end
+
+    context 'when gemset options' do
+      let(:options) { { gemset: '1.9.3@simple_project' } }
+
+      it 'should print gemset commands' do
+        should eq(
+          <<-output.strip_heredoc.strip
+            rm -rf pkg
+            rake build
+            [ -s "/usr/local/rvm/scripts/rvm" ] && . "/usr/local/rvm/scripts/rvm"
+            rvm use 1.9.3@simple_project
+            gem cleanup simple_gem
+            gem install ./simple_gem-1.0.gem
           output
         )
       end
