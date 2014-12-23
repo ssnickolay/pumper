@@ -20,7 +20,7 @@ module Bumper
         commands.add("cp pkg/* ../#{ project }/vendor/cache")
         commands.add("cd ../#{ project } && bundle install --local")
       else
-        commands.add("gem install ./#{ specification.gem_file_name }")
+        commands.add("gem install ./pkg/#{ specification.gem_file_name }")
       end
 
       commands.run!
