@@ -1,3 +1,4 @@
+require 'delegate'
 module Bumper
   class Specification < SimpleDelegator
     def initialize(gemspec)
