@@ -11,7 +11,7 @@ module Bumper
 
       commands = CommandRepository.new(project, options)
 
-      commands.add("gem cleanup #{ specification.name }", :rvm)
+      commands.add("gem uninstall #{ specification.name } --all -x", :rvm)
       if options[:vendor]
         commands.add("cp pkg/* ../#{ project }/vendor/cache")
         commands.add("cd ../#{ project }")

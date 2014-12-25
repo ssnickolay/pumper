@@ -26,7 +26,7 @@ describe Bumper::Bump do
           <<-output.strip_heredoc.strip
             rm -rf pkg
             bundle exec rake build
-            gem cleanup simple_gem
+            gem uninstall simple_gem --all -x
             gem install ./pkg/simple_gem-1.0.gem
           output
         )
@@ -41,7 +41,7 @@ describe Bumper::Bump do
           <<-output.strip_heredoc.strip
             rm -rf pkg
             bundle exec rake build
-            gem cleanup simple_gem
+            gem uninstall simple_gem --all -x
             cp pkg/* ../simple_project/vendor/cache
             cd ../simple_project
             bundle install --local
@@ -58,7 +58,7 @@ describe Bumper::Bump do
           <<-output.strip_heredoc.strip
             rm -rf pkg
             bundle exec rake build
-            rvm 1.9.3@simple_project exec gem cleanup simple_gem
+            rvm 1.9.3@simple_project exec gem uninstall simple_gem --all -x
             rvm 1.9.3@simple_project exec gem install ./pkg/simple_gem-1.0.gem
           output
         )
