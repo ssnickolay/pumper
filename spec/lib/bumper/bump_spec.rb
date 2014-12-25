@@ -25,9 +25,9 @@ describe Bumper::Bump do
         should eq(
           <<-output.strip_heredoc.strip
             rm -rf pkg
-            rake build
+            bundle exec rake build
             gem cleanup simple_gem
-            gem install ./simple_gem-1.0.gem
+            gem install ./pkg/simple_gem-1.0.gem
           output
         )
       end
@@ -40,10 +40,11 @@ describe Bumper::Bump do
         should eq(
           <<-output.strip_heredoc.strip
             rm -rf pkg
-            rake build
+            bundle exec rake build
             gem cleanup simple_gem
             cp pkg/* ../simple_project/vendor/cache
-            cd ../simple_project && bundle install --local
+            cd ../simple_project
+            bundle install --local
           output
         )
       end
@@ -56,11 +57,9 @@ describe Bumper::Bump do
         should eq(
           <<-output.strip_heredoc.strip
             rm -rf pkg
-            rake build
-            [ -s "/usr/local/rvm/scripts/rvm" ] && . "/usr/local/rvm/scripts/rvm"
-            rvm use 1.9.3@simple_project
-            gem cleanup simple_gem
-            gem install ./simple_gem-1.0.gem
+            bundle exec rake build
+            rvm 1.9.3@simple_project exec gem cleanup simple_gem
+            rvm 1.9.3@simple_project exec gem install ./pkg/simple_gem-1.0.gem
           output
         )
       end

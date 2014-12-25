@@ -9,18 +9,15 @@ module Bumper
       gemfile = ProjectGemfile.new(project, options[:absolute_path])
       gemfile.bump_version!(specification)
 
-      commands = CommandRepository.new(project)
-      if options[:gemset]
-        commands.add('[ -s "/usr/local/rvm/scripts/rvm" ] && . "/usr/local/rvm/scripts/rvm"')
-        commands.add("rvm use #{ options[:gemset] }")
-      end
+      commands = CommandRepository.new(project, options)
 
-      commands.add("gem cleanup #{ specification.name }")
+      commands.add("gem cleanup #{ specification.name }", :rvm)
       if options[:vendor]
         commands.add("cp pkg/* ../#{ project }/vendor/cache")
-        commands.add("cd ../#{ project } && bundle install --local")
+        commands.add("cd ../#{ project }")
+        commands.add('bundle install --local', :rvm)
       else
-        commands.add("gem install ./pkg/#{ specification.gem_file_name }")
+        commands.add("gem install ./pkg/#{ specification.gem_file_name }", :rvm)
       end
 
       commands.run!
