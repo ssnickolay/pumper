@@ -1,32 +1,34 @@
 module Bumper
-  class ProjectGemfile
+  class UpdatingProject
     class UndefinedGem < StandardError; end
 
     def initialize(project, is_absolute_path)
-      @gemfile = find_gemfile(project, is_absolute_path)
+      @project = project
+      @is_absolute_path = is_absolute_path
+      @gemfile = gemfile_path
     end
 
     def bump_version!(specification)
-      text = File.read(gemfile)
+      text = File.read(@gemfile)
       if gem_defined?(text, specification.name)
-        File.open(gemfile, 'w') do |file|
+        File.open(@gemfile, 'w') do |file|
           file.puts(text.gsub(/#{ gem_name(specification.name) }.*/, specification.for_gemfile))
         end
       else
-        raise ProjectGemfile::UndefinedGem
+        raise UpdatingProject::UndefinedGem
       end
+    end
+
+    def path
+      @is_absolute_path ?
+        @project :
+        File.join(Dir.pwd, "../#{ @project }")
     end
 
     private
 
-    attr_reader :gemfile
-
-    def find_gemfile(project, is_absolute_path)
-      if is_absolute_path
-        "#{ project }/Gemfile"
-      else
-        File.join(Dir.pwd, "../#{ project }/Gemfile")
-      end
+    def gemfile_path
+      "#{ path }/Gemfile"
     end
 
     def gem_defined?(gemfile_text, gem)

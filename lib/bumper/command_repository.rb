@@ -1,12 +1,13 @@
 module Bumper
   class CommandRepository
+    include ShellCommands
+
     attr_reader :options
 
     def initialize(project, options)
       @project = project
       @options = options
       @cmds = []
-      init_cmds
     end
 
     def add(cmd, type = :system)
@@ -19,7 +20,7 @@ module Bumper
         command.print { |type| prefix(type) }
       end
 
-      puts "Success bump current gem in #{ @project }"
+      puts "Success bump current gem in #{ project }"
     end
 
     def debug
@@ -30,10 +31,7 @@ module Bumper
 
     private
 
-    def init_cmds
-      add('rm -rf pkg')
-      add('bundle exec rake build')
-    end
+    attr_reader :project
 
     def prefix(type)
       if type == :rvm && options[:gemset]

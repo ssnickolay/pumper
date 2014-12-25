@@ -13,7 +13,7 @@ describe Bumper::Bump do
   end
   before do
     allow_any_instance_of(Bumper::Bump).to receive(:specification).and_return(specification)
-    allow_any_instance_of(Bumper::ProjectGemfile).to receive(:bump_version!)
+    allow_any_instance_of(Bumper::UpdatingProject).to receive(:bump_version!)
     allow_any_instance_of(Bumper::CommandRepository).to receive(:run!) { |cmds| cmds.debug }
   end
 
@@ -38,14 +38,14 @@ describe Bumper::Bump do
 
       it 'should print vendor commands' do
         should eq(
-          <<-output.strip_heredoc.strip
+          <<-OUTPUT.strip_heredoc.strip
             rm -rf pkg
             bundle exec rake build
             gem uninstall simple_gem --all -x
-            cp pkg/* ../simple_project/vendor/cache
-            cd ../simple_project
+            cp pkg/* #{Dir.pwd}/../simple_project/vendor/cache
+            cd #{Dir.pwd}/../simple_project
             bundle install --local
-          output
+          OUTPUT
         )
       end
     end

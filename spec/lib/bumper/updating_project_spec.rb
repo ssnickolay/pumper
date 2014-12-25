@@ -1,11 +1,11 @@
 require 'ostruct'
-describe Bumper::ProjectGemfile do
+describe Bumper::UpdatingProject do
   let(:project) { File.expand_path('../../../fixtures', __FILE__) }
   let(:is_absolute_path) { true }
   let(:project_gemfile) { described_class.new(project, is_absolute_path) }
 
   before do
-    File.open(project_gemfile.send(:gemfile), 'w') { |f| f.write("gem 'simple_gem'") }
+    File.open(project_gemfile.send(:gemfile_path), 'w') { |f| f.write("gem 'simple_gem'") }
   end
 
   describe 'bump_version!' do
@@ -29,10 +29,10 @@ describe Bumper::ProjectGemfile do
 
     context 'when Gemfile have not bumped gem' do
       before do
-        File.open(project_gemfile.send(:gemfile), 'w') { |f| f.write('') }
+        File.open(project_gemfile.send(:gemfile_path), 'w') { |f| f.write('') }
       end
 
-      it { expect { bump_version }.to raise_error(Bumper::ProjectGemfile::UndefinedGem)  }
+      it { expect { bump_version }.to raise_error(Bumper::UpdatingProject::UndefinedGem)  }
     end
   end
 end
