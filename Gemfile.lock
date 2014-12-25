@@ -46,8 +46,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport
+  activesupport (~> 4.2)
   bumper!
   pry
-  rspec
-  rspec-its
+  rspec (~> 3.1)
+  rspec-its (~> 1.1)
