@@ -4,3 +4,4 @@ coverage/*
 .DS_Store
 pkg
 log
+Gemfile.lock
