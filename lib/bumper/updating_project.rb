@@ -2,6 +2,8 @@ module Bumper
   class UpdatingProject
     class UndefinedGem < StandardError; end
 
+    attr_reader :project
+
     def initialize(project, is_absolute_path)
       @project = project
       @is_absolute_path = is_absolute_path

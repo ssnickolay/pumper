@@ -20,7 +20,7 @@ module Bumper
         command.print { |type| prefix(type) }
       end
 
-      puts "Success bump current gem in #{ project }"
+      puts "Success bump current gem in #{ project.project }"
     end
 
     def debug

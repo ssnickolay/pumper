@@ -42,8 +42,8 @@ describe Bumper::Bump do
             rm -rf pkg
             bundle exec rake build
             gem uninstall simple_gem --all -x
-            cp pkg/* #{Dir.pwd}/../simple_project/vendor/cache
-            cd #{Dir.pwd}/../simple_project
+            cp pkg/* #{ Dir.pwd }/../simple_project/vendor/cache
+            cd #{ Dir.pwd }/../simple_project
             bundle install --local
           OUTPUT
         )
