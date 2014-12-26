@@ -17,7 +17,7 @@ module Bumper
     def run!
       @cmds.each do |command|
         command.run { |type| prefix(type) }
-        command.print { |type| prefix(type) }
+        puts command.print { |type| prefix(type) }
       end
 
       puts "Success bump current gem in #{ project.project }"
@@ -49,7 +49,7 @@ module Bumper
     end
 
     def run(&block)
-      system("#{ block.call(type) }#{ command }")
+      system("#{ block.call(type) }#{ command }") or raise
     end
 
     def print(&block)
