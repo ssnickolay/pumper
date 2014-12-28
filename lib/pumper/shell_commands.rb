@@ -1,4 +1,4 @@
-module Bumper
+module Pumper
   module ShellCommands
     def gem_rebuild
       add('rm -rf pkg')

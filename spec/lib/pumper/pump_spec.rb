@@ -1,9 +1,9 @@
 require 'ostruct'
-describe Bumper::Bump do
+describe Pumper::Pump do
   let(:options) { Hash.new }
   let(:default_options) { { project: 'simple_project' } }
 
-  let(:bumper) { described_class.new(options.merge(default_options)) }
+  let(:pumper) { described_class.new(options.merge(default_options)) }
   let(:specification) do
     OpenStruct.new(
       name: 'simple_gem',
@@ -12,13 +12,13 @@ describe Bumper::Bump do
     )
   end
   before do
-    allow_any_instance_of(Bumper::Bump).to receive(:specification).and_return(specification)
-    allow_any_instance_of(Bumper::UpdatingProject).to receive(:bump_version!)
-    allow_any_instance_of(Bumper::CommandRepository).to receive(:run!) { |cmds| cmds.debug }
+    allow_any_instance_of(Pumper::Pump).to receive(:specification).and_return(specification)
+    allow_any_instance_of(Pumper::UpdatingProject).to receive(:bump_version!)
+    allow_any_instance_of(Pumper::CommandRepository).to receive(:run!) { |cmds| cmds.debug }
   end
 
   describe '.perform' do
-    subject { bumper.perform }
+    subject { pumper.perform }
 
     context 'when simple options' do
       it 'should print base commands' do

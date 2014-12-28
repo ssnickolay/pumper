@@ -1,5 +1,5 @@
 require 'delegate'
-module Bumper
+module Pumper
   class Specification < SimpleDelegator
     def initialize(gemspec)
       specification = File.read(gemspec_file(gemspec))

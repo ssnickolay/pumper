@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'pry'
 require 'rspec'
-require 'bumper'
+require 'pumper'
 require 'rspec/its'
 require 'active_support/all'
 

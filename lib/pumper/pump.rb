@@ -1,5 +1,5 @@
-module Bumper
-  class Bump
+module Pumper
+  class Pump
     def initialize(options)
       @options = options
     end

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'optparse'
-require 'bumper'
+require 'pumper'
 
 options = Hash.new
 
@@ -31,4 +31,4 @@ end
 
 opts.parse!
 
-Bumper::Bump.new(Bumper::Configuration.configure!(options)).perform
+Pumper::Bump.new(Pumper::Configuration.configure!(options)).perform

@@ -1,4 +1,4 @@
-module Bumper
+module Pumper
   class CommandRepository
     include ShellCommands
 

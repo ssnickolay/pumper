@@ -1,4 +1,4 @@
-describe Bumper::Specification do
+describe Pumper::Specification do
   let(:gemspec) { File.expand_path('../../../fixtures/simple_gem.gemspec', __FILE__) }
 
   subject { described_class.new(gemspec) }
