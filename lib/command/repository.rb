@@ -2,11 +2,9 @@ module Command
   class Repository
     attr_reader :options
 
-    def initialize(project, options)
-      @project = project
+    def initialize(options)
       @options = options
       @cmds = []
-      @trash = []
     end
 
     def add(cmd, options = {})
@@ -14,33 +12,37 @@ module Command
     end
 
     def execute
-      @cmds.count.times do
+      with_transaction do |trash|
         command = @cmds.shift
         puts(command.name)
 
         command.execute
-        @trash.unshift(command)
+        trash.unshift(command)
       end
-      puts "Success bump current gem in #{ project.project }"
 
-    rescue => e
-      @trash.each(&:cancel)
-
-      puts 'Fail bump gem'
-      raise Command::ExecuteError(e.message)
-    end
-
-    def debug
-      @cmds.map(&:name).join("\n")
+      puts 'Success bump current gem'
     end
 
     private
 
-    attr_reader :project
-
     def rvm_prefix
       if options[:gemset]
         "rvm #{ options[:gemset] } exec "
+      end
+    end
+
+    def with_transaction
+      trash = []
+      wrapper = Command::StashGemfileLockCommand.new
+      begin
+        wrapper.execute
+        yield(trash)
+      rescue Exception => e
+        trash.each(&:cancel)
+        puts 'Fail bump current gem'
+        raise Command::ExecuteError.new(e.message)
+      ensure
+        wrapper.cancel
       end
     end
   end

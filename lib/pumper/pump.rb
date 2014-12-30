@@ -6,24 +6,19 @@ module Pumper
 
     def perform
       project = UpdatingProject.new(options[:project], options[:absolute_path])
-      commands = Command::Repository.new(project, options)
+      commands = Command::Repository.new(options)
 
-      commands.gem_rebuild
-
-      system('mv ./Gemfile.lock ./Gemfile.lock.stash')
-
-      commands.gem_uninstall(specification.name)
+      commands.add(Command::GemRebuildCommand)
+      commands.add(Command::GemUninstallCommand, { gem_name: specification.name })
 
       if options[:vendor]
-        commands.gem_install_to_vendor
+        commands.add(Command::GemInstallToVendorCommand, { project_path: project.path, gem_name: specification.name })
       else
-        commands.gem_install(specification)
+        commands.add(Command::GemInstallCommand, { gem_name: specification.name, gem_file_name: specification.gem_file_name })
       end
 
       project.bump_version!(specification)
       commands.execute
-
-      system('mv ./Gemfile.lock.stash ./Gemfile.lock')
     end
 
     private

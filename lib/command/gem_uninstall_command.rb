@@ -1,5 +1,5 @@
 module Command
-  class GemUninstallCommand
+  class GemUninstallCommand < BaseCommand
     def cancel
       puts "WARNING: You must reinstall gem #{ options[:gem_name] }"
     end

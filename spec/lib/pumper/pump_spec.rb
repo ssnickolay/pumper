@@ -14,7 +14,7 @@ describe Pumper::Pump do
   before do
     allow_any_instance_of(Pumper::Pump).to receive(:specification).and_return(specification)
     allow_any_instance_of(Pumper::UpdatingProject).to receive(:bump_version!)
-    allow_any_instance_of(Pumper::CommandRepository).to receive(:run!) { |cmds| cmds.debug }
+    allow_any_instance_of(Command::Repository).to receive(:execute) { |cmds| cmds.debug }
   end
 
   describe '.perform' do

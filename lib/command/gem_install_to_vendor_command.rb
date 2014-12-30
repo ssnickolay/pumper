@@ -1,17 +1,11 @@
 module Command
-  class GemInstallToVendorCommand
+  class GemInstallToVendorCommand < BaseCommand
     def cancel
-      Command::GemUninstallCommand.new(rvm_prefix, { gem_name: options[:specification].name }).execute
+      Command::GemUninstallCommand.new(rvm_prefix, { gem_name: options[:gem_name] }).execute
     end
 
     def name
-      "cp pkg/* #{ path }/vendor/cache && cd #{ path } && #{ rvm_prefix } bundle install --local"
-    end
-
-    private
-
-    def path
-      options[:project].path
+      "cp pkg/* #{ options[:project_path] }/vendor/cache && cd #{ options[:project_path] } && #{ rvm_prefix } bundle install --local"
     end
   end
 end

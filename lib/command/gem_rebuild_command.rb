@@ -1,5 +1,5 @@
 module Command
-  class GemRebuildCommand
+  class GemRebuildCommand < BaseCommand
     def cancel
       system('rm -rf pkg')
     end
