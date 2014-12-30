@@ -31,4 +31,4 @@ end
 
 opts.parse!
 
-Pumper::Bump.new(Pumper::Configuration.configure!(options)).perform
+Pumper::Pump.new(Pumper::Configuration.configure!(options)).perform
