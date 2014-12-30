@@ -5,7 +5,7 @@ module Command
     end
 
     def name
-      "#{ rvm_prefix } gem install ./pkg/#{ options[:gem_file_name] }"
+      clean "#{ rvm_prefix } gem install ./pkg/#{ options[:gem_file_name] }"
     end
   end
 end

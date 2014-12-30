@@ -13,11 +13,13 @@ module Command
 
     def execute
       with_transaction do |trash|
-        command = @cmds.shift
-        puts(command.name)
+        while @cmds.any?
+          command = @cmds.shift
+          puts(command.name)
 
-        command.execute
-        trash.unshift(command)
+          command.execute
+          trash.unshift(command)
+        end
       end
 
       puts 'Success bump current gem'

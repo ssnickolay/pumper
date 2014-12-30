@@ -1,5 +1,5 @@
 require 'ostruct'
-describe Pumper::Pump do
+describe Pumper::Pump, stub_system: true do
   let(:options) { Hash.new }
   let(:default_options) { { project: 'simple_project' } }
 
@@ -14,20 +14,23 @@ describe Pumper::Pump do
   before do
     allow_any_instance_of(Pumper::Pump).to receive(:specification).and_return(specification)
     allow_any_instance_of(Pumper::UpdatingProject).to receive(:bump_version!)
-    allow_any_instance_of(Command::Repository).to receive(:execute) { |cmds| cmds.debug }
   end
 
   describe '.perform' do
-    subject { pumper.perform }
+    subject do
+      pumper.perform
+      $OUTPUT.join("\n")
+    end
 
     context 'when simple options' do
       it 'should print base commands' do
         should eq(
           <<-output.strip_heredoc.strip
-            rm -rf pkg
-            bundle exec rake build
+            mv ./Gemfile.lock ./Gemfile.lock.stash
+            rm -rf pkg && bundle exec rake build
             gem uninstall simple_gem --all -x
             gem install ./pkg/simple_gem-1.0.gem
+            mv ./Gemfile.lock.stash ./Gemfile.lock
           output
         )
       end
@@ -39,12 +42,11 @@ describe Pumper::Pump do
       it 'should print vendor commands' do
         should eq(
           <<-OUTPUT.strip_heredoc.strip
-            rm -rf pkg
-            bundle exec rake build
+            mv ./Gemfile.lock ./Gemfile.lock.stash
+            rm -rf pkg && bundle exec rake build
             gem uninstall simple_gem --all -x
-            cp pkg/* #{ Dir.pwd }/../simple_project/vendor/cache
-            cd #{ Dir.pwd }/../simple_project
-            bundle install --local
+            cp pkg/* #{ Dir.pwd }/../simple_project/vendor/cache && cd #{ Dir.pwd }/../simple_project && bundle install --local
+            mv ./Gemfile.lock.stash ./Gemfile.lock
           OUTPUT
         )
       end
@@ -56,10 +58,11 @@ describe Pumper::Pump do
       it 'should print gemset commands' do
         should eq(
           <<-output.strip_heredoc.strip
-            rm -rf pkg
-            bundle exec rake build
+            mv ./Gemfile.lock ./Gemfile.lock.stash
+            rm -rf pkg && bundle exec rake build
             rvm 1.9.3@simple_project exec gem uninstall simple_gem --all -x
             rvm 1.9.3@simple_project exec gem install ./pkg/simple_gem-1.0.gem
+            mv ./Gemfile.lock.stash ./Gemfile.lock
           output
         )
       end

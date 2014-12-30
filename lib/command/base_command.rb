@@ -20,5 +20,11 @@ module Command
     def name
       raise NotImplementedError
     end
+
+    private
+
+    def clean(cmd)
+      cmd.gsub(/\s+/, ' ').strip
+    end
   end
 end

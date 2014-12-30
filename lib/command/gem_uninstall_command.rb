@@ -5,7 +5,7 @@ module Command
     end
 
     def name
-      "#{ rvm_prefix } gem uninstall #{ options[:gem_name] } --all -x"
+      clean "#{ rvm_prefix } gem uninstall #{ options[:gem_name] } --all -x"
     end
   end
 end

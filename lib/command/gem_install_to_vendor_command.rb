@@ -5,7 +5,7 @@ module Command
     end
 
     def name
-      "cp pkg/* #{ options[:project_path] }/vendor/cache && cd #{ options[:project_path] } && #{ rvm_prefix } bundle install --local"
+      clean "cp pkg/* #{ options[:project_path] }/vendor/cache && cd #{ options[:project_path] } && #{ rvm_prefix } bundle install --local"
     end
   end
 end
