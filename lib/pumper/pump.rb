@@ -14,7 +14,14 @@ module Pumper
       if options[:vendor]
         commands.add(Command::GemInstallToVendorCommand, { project_path: project.path, gem_name: specification.name })
       else
-        commands.add(Command::GemInstallCommand, { gem_name: specification.name, gem_file_name: specification.gem_file_name })
+        commands.add(
+          Command::GemInstallCommand,
+          {
+            gem_name: specification.name,
+            gem_file_name: specification.gem_file_name,
+            project_path: project.path
+          }
+        )
       end
 
       project.bump_version!(specification)

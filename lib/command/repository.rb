@@ -22,7 +22,7 @@ module Command
         end
       end
 
-      puts 'Success bump current gem'.green
+      puts 'Success bump current gem!'.green
     end
 
     private

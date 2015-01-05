@@ -29,7 +29,7 @@ describe Pumper::Pump, stub_system: true do
             mv ./Gemfile.lock ./Gemfile.lock.stash
             rm -rf pkg && bundle exec rake build
             gem uninstall simple_gem --all -x
-            gem install ./pkg/simple_gem-1.0.gem
+            gem install ./pkg/simple_gem-1.0.gem && cd #{ Dir.pwd }/../simple_project && bundle install
             mv ./Gemfile.lock.stash ./Gemfile.lock
           output
         )
@@ -61,7 +61,7 @@ describe Pumper::Pump, stub_system: true do
             mv ./Gemfile.lock ./Gemfile.lock.stash
             rm -rf pkg && bundle exec rake build
             rvm 1.9.3@simple_project exec gem uninstall simple_gem --all -x
-            rvm 1.9.3@simple_project exec gem install ./pkg/simple_gem-1.0.gem
+            rvm 1.9.3@simple_project exec gem install ./pkg/simple_gem-1.0.gem && cd #{ Dir.pwd }/../simple_project && rvm 1.9.3@simple_project exec bundle install
             mv ./Gemfile.lock.stash ./Gemfile.lock
           output
         )
