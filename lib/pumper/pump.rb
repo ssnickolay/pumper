@@ -23,7 +23,7 @@ module Pumper
 
     private
 
-    attr_reader :options, :project
+    attr_reader :options
 
     def specification
       @specification ||= Specification.new(options[:gemspec])

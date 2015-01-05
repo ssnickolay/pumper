@@ -15,14 +15,14 @@ module Command
       with_transaction do |trash|
         while @cmds.any?
           command = @cmds.shift
-          puts(command.name)
+          puts(command.name.brown)
 
           command.execute
           trash.unshift(command)
         end
       end
 
-      puts 'Success bump current gem'
+      puts 'Success bump current gem'.green
     end
 
     private
@@ -41,11 +41,17 @@ module Command
         yield(trash)
       rescue Exception => e
         trash.each(&:cancel)
-        puts 'Fail bump current gem'
+        puts 'Fail bump current gem'.red
         raise Command::ExecuteError
       ensure
         wrapper.cancel
       end
     end
   end
+end
+
+class String
+  def red;   "\033[31m#{self}\033[0m" end
+  def green; "\033[32m#{self}\033[0m" end
+  def brown; "\033[33m#{self}\033[0m" end
 end
