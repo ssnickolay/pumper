@@ -42,7 +42,7 @@ module Command
       rescue Exception => e
         trash.each(&:cancel)
         puts 'Fail bump current gem'
-        raise Command::ExecuteError.new(e.message)
+        raise Command::ExecuteError
       ensure
         wrapper.cancel
       end

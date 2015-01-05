@@ -67,5 +67,30 @@ describe Pumper::Pump, stub_system: true do
         )
       end
     end
+
+    context 'when gem install failed' do
+      before { allow_any_instance_of(Command::GemInstallCommand).to receive(:system).and_return(false) }
+
+      it { expect{ subject }.to raise_error(Command::ExecuteError) }
+
+      describe 'canceled commands' do
+        subject do
+          pumper.perform rescue nil
+          $OUTPUT.join("\n")
+        end
+
+        it 'should brake on install and run cancel commands' do
+          should eq(
+            <<-output.strip_heredoc.strip
+              mv ./Gemfile.lock ./Gemfile.lock.stash
+              rm -rf pkg && bundle exec rake build
+              gem uninstall simple_gem --all -x
+              rm -rf pkg
+              mv ./Gemfile.lock.stash ./Gemfile.lock
+            output
+          )
+        end
+      end
+    end
   end
 end
