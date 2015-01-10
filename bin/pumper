@@ -7,24 +7,25 @@ options = Hash.new
 opts = OptionParser.new do |opts|
   opts.banner = %q[Bumper]
 
-  opts.on('-p', '--project PROJECT_PATH', 'Set path to gem bump project') do |project|
+  opts.on('-p', '--project PROJECT_PATH', 'Path to ruby project where need update current gem') do |project|
     options[:project] = project
   end
 
-  # Default find in current folder file *.gemspec
-  opts.on('-s', '--gemspec GEMSPEC_PATH', 'Set path to gemspec') do |gemspec|
-    options[:gemspec] = gemspec
-  end
-
-  opts.on('-g', '--gemset GEMSET', 'Set path to gemspec') do |gemset|
-    options[:gemset] = gemset
-  end
-
-  opts.on('-a', '--absolute_path', 'If project absolute path') do
+  opts.on('-a', '--absolute_path', 'If project path is absolute') do
     options[:absolute_path] = true
   end
 
-  opts.on('-e', '--vendor', 'If need add to vendor path') do
+  # Default find in current folder file *.gemspec
+  opts.on('-s', '--gemspec GEMSPEC_PATH', 'Path to .gemspec (default search in current folder *.gemspec)') do |gemspec|
+    options[:gemspec] = gemspec
+  end
+
+  opts.on('-g', '--gemset GEMSET', 'Gemset name (if you use rvm)') do |gemset|
+    options[:gemset] = gemset
+  end
+
+
+  opts.on('-e', '--vendor', 'If project gems stored in the vendor/cache') do
     options[:vendor] = true
   end
 end
