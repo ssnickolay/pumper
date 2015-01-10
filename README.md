@@ -3,15 +3,15 @@
 Pumper
 ======
 
-**Pumper** helps quickly update developed gem (e.g. <your_gem>)in dependent project (which uses bundler).
+**Pumper** helps quickly update developed gem (e.g. &lt;your_gem>)in dependent project (which uses bundler).
 
 **Pumper** do:
 
-1. Update <your_gem>'s version in Gemfile of project.
+1. Update &lt;your_gem>'s version in Gemfile of project.
 
-2. Remove any old versions of <your_gem>.
+2. Remove any old versions of &lt;your_gem>.
 
-3. Install new build of <your_gem>.
+3. Install new build of &lt;your_gem>.
 
 Supports install gem to vendor/cache folder and using RVM (see [Options](#options))
 
@@ -65,7 +65,7 @@ Success bump current gem
 
  Option                   | Description
 ------------------------- |:-----------------------------------------------------------
- `--project`              | Path to ruby project where <your_gem> needs update
+ `--project`              | Path to ruby project where &lt;your_gem> needs update
  `--absolute_path`        | If project path is absolute
  `--gemspec`              | Path to .gemspec (default search in current folder *.gemspec)
  `--gemset`               | Gemset name (if you use RVM)
