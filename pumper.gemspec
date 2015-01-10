@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 3.1'
   s.add_development_dependency 'rspec-its', '~> 1.1'
   s.add_development_dependency 'pry'
-  s.add_development_dependency 'activesupport', '~> 4.2'
+  s.add_development_dependency 'activesupport'
 end
