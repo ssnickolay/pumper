@@ -8,9 +8,9 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Nikolay Sverchkov']
   s.email       = ['ssnikolay@gmail.com']
-  s.homepage    = 'https://github.com/ssnikolay/bumper'
-  s.summary     = 'Gem for move another gems to dependent projects'
-  s.description = 'Gem for move another gems to dependent projects'
+  s.homepage    = 'https://github.com/ssnikolay/pumper'
+  s.summary     = 'For update gem version in dependent project'
+  s.description = 'For update gem version in dependent project'
 
   s.rubyforge_project = 'pumper'
 
@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 3.1'
   s.add_development_dependency 'rspec-its', '~> 1.1'
   s.add_development_dependency 'pry'
-  s.add_development_dependency 'activesupport'
+  s.add_development_dependency 'activesupport', ' >= 3'
 end
