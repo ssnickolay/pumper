@@ -13,8 +13,13 @@ module Pumper
       private
 
       def validate(options)
-        raise ProjectNotSet.new('You need set project (--project <PATH_TO_PROJECT>)') if options[:project].nil?
-        raise InvalidOptions.new('Invalid options') if options[:config] && (options[:gemset] || options[:vendor])
+        if options[:config] && (options[:project] || options[:gemset] || options[:vendor])
+          raise InvalidOptions.new('Error: config option use without [project|gemset|vendor] options')
+        end
+
+        if options[:project].nil? && options[:config].nil?
+          raise ProjectNotSet.new('You need set project (--project <PATH_TO_PROJECT>) or use config')
+        end
       end
     end
   end

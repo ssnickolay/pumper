@@ -5,7 +5,7 @@ require 'pumper'
 options = Hash.new
 
 opts = OptionParser.new do |opts|
-  opts.banner = %q[Bumper]
+  opts.banner = %q[Pumper]
 
   opts.on('-p', '--project PROJECT_PATH', 'Path to ruby project where need update current gem') do |project|
     options[:project] = project
