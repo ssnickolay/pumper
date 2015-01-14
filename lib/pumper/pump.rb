@@ -33,7 +33,7 @@ module Pumper
     attr_reader :options
 
     def specification
-      @specification ||= Specification.new(options[:gemspec])
+      @specification ||= Specification.new
     end
   end
 end

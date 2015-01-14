@@ -1,7 +1,10 @@
 describe Pumper::Specification do
-  let(:gemspec) { File.expand_path('../../../fixtures/simple_gem.gemspec', __FILE__) }
+  subject { described_class.new }
 
-  subject { described_class.new(gemspec) }
+  before do
+    currrent_path = Dir.pwd
+    Dir.stub(:pwd).and_return("#{ currrent_path }/spec/fixtures")
+  end
 
   its(:name) { is_expected.to eq('simple_gem') }
   its(:version) { is_expected.to eq('1.2.3') }

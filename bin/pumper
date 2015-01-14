@@ -15,11 +15,6 @@ opts = OptionParser.new do |opts|
     options[:absolute_path] = true
   end
 
-  # Default find in current folder file *.gemspec
-  opts.on('-s', '--gemspec GEMSPEC_PATH', 'Path to .gemspec (default search in current folder *.gemspec)') do |gemspec|
-    options[:gemspec] = gemspec
-  end
-
   opts.on('-g', '--gemset GEMSET', 'Gemset name (if you use rvm)') do |gemset|
     options[:gemset] = gemset
   end

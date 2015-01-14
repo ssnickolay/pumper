@@ -1,8 +1,8 @@
 require 'delegate'
 module Pumper
   class Specification < SimpleDelegator
-    def initialize(gemspec)
-      specification = File.read(gemspec_file(gemspec))
+    def initialize
+      specification = File.read(gemspec_file)
       super(eval(specification))
     end
 
@@ -20,8 +20,8 @@ module Pumper
 
     private
 
-    def gemspec_file(gemspec)
-      gemspec || File.join(Dir.pwd, Dir.glob('*.gemspec'))
+    def gemspec_file
+      Dir.glob("#{ Dir.pwd }/*.gemspec").first
     end
   end
 end

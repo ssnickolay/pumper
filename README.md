@@ -67,7 +67,6 @@ Success bump current gem
 ------------------------- |:-----------------------------------------------------------
  `--project`              | Path to ruby project where &lt;your_gem> needs update
  `--absolute_path`        | If project path is absolute
- `--gemspec`              | Path to .gemspec (default search in current folder *.gemspec)
  `--gemset`               | Gemset name (if you use RVM)
  `--vendor`               | If project gems stored in the vendor/cache
 
