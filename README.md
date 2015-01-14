@@ -37,7 +37,7 @@ $ gem install pumper
 
 ## Usage
 
-Basic **Pumper** use:
+For basic usage **Pumper** you need to go gem folder and run:
 
 + your_gem
     - your_gem.gemspec
