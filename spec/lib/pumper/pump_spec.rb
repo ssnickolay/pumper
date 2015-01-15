@@ -13,7 +13,7 @@ describe Pumper::Pump, stub_system: true do
   end
   before do
     allow_any_instance_of(Pumper::Pump).to receive(:specification).and_return(specification)
-    allow_any_instance_of(Pumper::UpdatingProject).to receive(:bump_version!)
+    allow_any_instance_of(Pumper::Project).to receive(:bump_version!)
   end
 
   describe '.perform' do

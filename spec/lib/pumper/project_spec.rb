@@ -1,5 +1,5 @@
 require 'ostruct'
-describe Pumper::UpdatingProject do
+describe Pumper::Project do
   let(:project) { File.expand_path('../../../fixtures', __FILE__) }
   let(:is_absolute_path) { true }
   let(:project_gemfile) { described_class.new(project, is_absolute_path) }
@@ -32,7 +32,7 @@ describe Pumper::UpdatingProject do
         File.open(project_gemfile.send(:gemfile_path), 'w') { |f| f.write('') }
       end
 
-      it { expect { bump_version }.to raise_error(Pumper::UpdatingProject::UndefinedGem)  }
+      it { expect { bump_version }.to raise_error(Pumper::Project::UndefinedGem)  }
     end
   end
 end

@@ -1,5 +1,5 @@
 module Pumper
-  class UpdatingProject
+  class Project
     class UndefinedGem < StandardError; end
 
     attr_reader :project
@@ -17,7 +17,7 @@ module Pumper
           file.puts(text.gsub(/#{ gem_name(specification.name) }.*/, specification.for_gemfile))
         end
       else
-        raise UpdatingProject::UndefinedGem
+        raise Project::UndefinedGem
       end
     end
 

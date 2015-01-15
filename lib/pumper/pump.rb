@@ -5,7 +5,7 @@ module Pumper
     end
 
     def perform
-      project = UpdatingProject.new(options[:project], options[:absolute_path])
+      project = Project.new(options[:project], options[:absolute_path])
       commands = Command::Repository.new(options)
 
       commands.add(Command::GemRebuildCommand)
