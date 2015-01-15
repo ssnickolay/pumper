@@ -3,7 +3,7 @@ describe Pumper::Specification do
 
   before do
     currrent_path = Dir.pwd
-    Dir.stub(:pwd).and_return("#{ currrent_path }/spec/fixtures")
+    allow(Dir).to receive_messages(pwd: "#{ currrent_path }/spec/fixtures")
   end
 
   its(:name) { is_expected.to eq('simple_gem') }
