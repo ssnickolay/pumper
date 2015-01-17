@@ -12,7 +12,7 @@ opts = OptionParser.new do |opts|
   end
 
   opts.on('-a', '--absolute_path', 'If project path is absolute') do
-    options[:absolute_path] = true
+    options[:is_absolute_path] = true
   end
 
   opts.on('-c', '--config', 'If use .pumper.yml config') do
@@ -24,7 +24,7 @@ opts = OptionParser.new do |opts|
   end
 
   opts.on('-e', '--vendor', 'If project gems stored in the vendor/cache') do
-    options[:vendor] = true
+    options[:is_vendor] = true
   end
 end
 

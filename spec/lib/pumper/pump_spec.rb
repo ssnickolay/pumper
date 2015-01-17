@@ -37,7 +37,7 @@ describe Pumper::Pump, stub_system: true do
     end
 
     context 'when vendor options' do
-      let(:options) { { vendor: true } }
+      let(:options) { { is_vendor: true } }
 
       it 'should print vendor commands' do
         should eq(

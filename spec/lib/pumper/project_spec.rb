@@ -1,15 +1,19 @@
 require 'ostruct'
 describe Pumper::Project do
-  let(:project) { File.expand_path('../../../fixtures', __FILE__) }
-  let(:is_absolute_path) { true }
-  let(:project_gemfile) { described_class.new(project, is_absolute_path) }
+  let(:options) {
+    {
+      project: File.expand_path('../../../fixtures', __FILE__),
+      is_absolute_path: true
+    }
+  }
+  let(:project_gemfile) { described_class.new(options) }
 
   before do
     File.open(project_gemfile.send(:gemfile_path), 'w') { |f| f.write("gem 'simple_gem'") }
   end
 
   describe 'bump_version!' do
-    subject { File.read("#{ project }/Gemfile") }
+    subject { File.read("#{ options[:project] }/Gemfile") }
 
     let(:specification) do
       OpenStruct.new(

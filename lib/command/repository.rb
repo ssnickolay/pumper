@@ -1,9 +1,7 @@
 module Command
   class Repository
-    attr_reader :options
-
-    def initialize(options)
-      @options = options
+    def initialize(project)
+      @project = project
       @cmds = []
     end
 
@@ -27,9 +25,11 @@ module Command
 
     private
 
+    attr_reader :project
+
     def rvm_prefix
-      if options[:gemset]
-        "rvm #{ options[:gemset] } exec "
+      if project.gemset
+        "rvm #{ project.gemset } exec "
       end
     end
 

@@ -5,13 +5,13 @@ module Pumper
     end
 
     def perform
-      project = Project.new(options[:project], options[:absolute_path])
-      commands = Command::Repository.new(options)
+      project = Project.new(options)#options[:project], options[:absolute_path])
+      commands = Command::Repository.new(project)
 
       commands.add(Command::GemRebuildCommand)
       commands.add(Command::GemUninstallCommand, { gem_name: specification.name })
 
-      if options[:vendor]
+      if project.is_vendor
         commands.add(Command::GemInstallToVendorCommand, { project_path: project.path, gem_name: specification.name })
       else
         commands.add(

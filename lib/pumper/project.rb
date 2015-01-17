@@ -1,12 +1,9 @@
 module Pumper
-  class Project
+  class Project < Struct.new(:project, :is_absolute_path, :gemset, :is_vendor)
     class UndefinedGem < StandardError; end
 
-    attr_reader :project
-
-    def initialize(project, is_absolute_path)
-      @project = project
-      @is_absolute_path = is_absolute_path
+    def initialize(options)
+      set_options(options)
       @gemfile = gemfile_path
     end
 
@@ -22,12 +19,18 @@ module Pumper
     end
 
     def path
-      @is_absolute_path ?
-        @project :
-        File.join(Dir.pwd, "../#{ @project }")
+      is_absolute_path ?
+        project :
+        File.join(Dir.pwd, "../#{ project }")
     end
 
     private
+
+    def set_options(options)
+      members.each do |member|
+        self.send("#{ member }=", options[member])
+      end
+    end
 
     def gemfile_path
       "#{ path }/Gemfile"
