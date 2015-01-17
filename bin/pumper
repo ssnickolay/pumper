@@ -29,5 +29,10 @@ opts = OptionParser.new do |opts|
 end
 
 opts.parse!
+config_options = Pumper::Configuration.configure!(options)
 
-Pumper::Pump.new(Pumper::Configuration.configure!(options)).perform
+if options[:config]
+  config_options.each { |options| Pumper::Pump.new(options).perform }
+else
+  Pumper::Pump.new(config_options).perform
+end

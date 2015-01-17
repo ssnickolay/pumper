@@ -1,0 +1,10 @@
+projects:
+  my_app:
+    path: /Users/admin/Projects/my_app
+    absolute_path: true
+    gemset: ruby-1.9.3@my_app
+    vendor: true
+  my_app2:
+    path: /Users/admin/Projects/my_app2
+    absolute_path: true
+    gemset: ruby-2.1.0@my_app2
