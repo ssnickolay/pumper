@@ -11,7 +11,7 @@ end
 module Pumper
   autoload :Configuration,     'pumper/configuration'
   autoload :Specification,     'pumper/specification'
-  autoload :Project,   'pumper/project'
+  autoload :Project,           'pumper/project'
   autoload :Pump,              'pumper/pump'
 end
 
