@@ -29,7 +29,7 @@ module Pumper
       end
 
       def parse_from_config
-        file = File.read(File.join(Dir.pwd, '.piper.yml'))
+        file = File.read(File.join(Dir.pwd, '.pumper.yml'))
         YAML.load(file)['projects'].each_with_object([]) do |(_, option), arr|
           arr.push(
             project: option['path'],
