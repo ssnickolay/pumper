@@ -24,7 +24,7 @@ module Pumper
         end
 
         if options[:project].nil? && options[:config].nil?
-          raise ProjectNotSet.new('You need set project (--project <PATH_TO_PROJECT>) or use config')
+          raise ProjectNotSet.new('You need to set project (--project <PATH_TO_PROJECT>) or use config')
         end
       end
 
