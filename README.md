@@ -37,7 +37,7 @@ $ gem install pumper
 
 ## Usage
 
-Basic **Pumper** use:
+For basic usage **Pumper** you need to go to gem folder and run:
 
 + your_gem
     - your_gem.gemspec
@@ -67,9 +67,10 @@ Success bump current gem
 ------------------------- |:-----------------------------------------------------------
  `--project`              | Path to ruby project where &lt;your_gem> needs update
  `--absolute_path`        | If project path is absolute
- `--gemspec`              | Path to .gemspec (default search in current folder *.gemspec)
  `--gemset`               | Gemset name (if you use RVM)
  `--vendor`               | If project gems stored in the vendor/cache
+ `--config`               | If you want to use special config for updating project
+
 
 Example:
 
@@ -83,4 +84,23 @@ Successfully uninstalled your_gem-0.0.1
 cp pkg/* /Users/admin/Project/rails_project/vendor/cache && cd /Users/admin/Project/rails_project && rvm ruby-2.1.0@rails_project exec bundle install --local
 Installing your_gem 0.0.1
 Success bump current gem
+```
+
+#### Config option
+
+For use `--config` option you need to put `.pumper.yml` to &lt;your_gem> folder and write something like this:
+
+```yml
+projects:
+  rails_project:
+    path: /Users/admin/Projects/rails_project
+    absolute_path: true
+    gemset: ruby-2.1.0
+    vendor: true
+```
+
+and run
+
+```sh
+$ pumper --config
 ```
