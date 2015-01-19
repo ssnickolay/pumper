@@ -1,6 +1,6 @@
 # Parse and validate options
-#   * _options_ - user set options
-# Return array of options hash (from .piper.yml) if set --config
+#   * _options_ - user's set options
+# Return array of options hash (from .pumper.yml) if set --config
 # Return options hash unless set --config
 require 'yaml'
 

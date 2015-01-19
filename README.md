@@ -37,7 +37,7 @@ $ gem install pumper
 
 ## Usage
 
-For basic usage **Pumper** you need to go gem folder and run:
+For basic usage **Pumper** you need to go to gem folder and run:
 
 + your_gem
     - your_gem.gemspec
@@ -69,7 +69,7 @@ Success bump current gem
  `--absolute_path`        | If project path is absolute
  `--gemset`               | Gemset name (if you use RVM)
  `--vendor`               | If project gems stored in the vendor/cache
- `--config`               | If you want use special config for update project
+ `--config`               | If you want to use special config for updating project
 
 
 Example:
@@ -88,7 +88,7 @@ Success bump current gem
 
 #### Config option
 
-For use `--config` option you need put `.pumper.yml` to &lt;your_gem> folder and write something like this:
+For use `--config` option you need to put `.pumper.yml` to &lt;your_gem> folder and write something like this:
 
 ```yml
 projects:
