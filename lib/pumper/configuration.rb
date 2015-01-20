@@ -1,7 +1,6 @@
 # Parse and validate options
 #   * _options_ - user's set options
-# Return array of options hash (from .pumper.yml) if set --config
-# Return options hash unless set --config
+# Return array of options hash (from .pumper.yml if set --config)
 require 'yaml'
 
 module Pumper
@@ -13,7 +12,7 @@ module Pumper
       def configure!(options)
         validate(options)
 
-        options[:config] ? parse_from_config : options
+        options[:config] ? by_config(options[:list]) : [ options ]
       end
 
       private
@@ -28,16 +27,29 @@ module Pumper
         end
       end
 
-      def parse_from_config
+      def by_config(list)
+        config = parse_config
+        slice_config =
+          list.nil? ? config : slice(config, list)
+
+        slice_config.values
+      end
+
+      def parse_config
         file = File.read(File.join(Dir.pwd, '.pumper.yml'))
-        YAML.load(file)['projects'].each_with_object([]) do |(_, option), arr|
-          arr.push(
-            project: option['path'],
-            is_absolute_path: option['absolute_path'],
-            gemset: option['gemset'],
-            is_vendor: option['vendor']
-          )
+        YAML.load(file)['projects'].each_with_object({}) do |(project, option), hash|
+          hash[project] =
+            {
+              project: option['path'],
+              is_absolute_path: option['absolute_path'],
+              gemset: option['gemset'],
+              is_vendor: option['vendor']
+            }
         end
+      end
+
+      def slice(config, list)
+        config.select { |project, _| list.include?(project) }
       end
     end
   end

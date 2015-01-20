@@ -11,7 +11,7 @@ describe Pumper::Configuration do
   context 'when valid project' do
     let(:options) { { project: 'cashier' } }
 
-    it { is_expected.to eq(options) }
+    it { is_expected.to eq([ options ]) }
   end
 
   context 'when raise error InvalidOptions' do
@@ -22,6 +22,7 @@ describe Pumper::Configuration do
 
   context 'when --config' do
     let(:options) { { config: true } }
+
     before do
       pwd = Dir.pwd
       allow(Dir).to receive(:pwd) { "#{ pwd }/spec/fixtures" }
@@ -42,6 +43,21 @@ describe Pumper::Configuration do
           is_vendor: nil
         }
       ])
+    end
+
+    context 'when --list' do
+      let(:options) { { config: true, list: ['my_app2'] } }
+
+      it 'should select only list projects' do
+        is_expected.to eq([
+          {
+            project: '/Users/admin/Projects/my_app2',
+            is_absolute_path: true,
+            gemset: 'ruby-2.1.0@my_app2',
+            is_vendor: nil
+          }
+        ])
+      end
     end
   end
 end
