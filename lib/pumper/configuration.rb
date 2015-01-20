@@ -22,8 +22,12 @@ module Pumper
           raise InvalidOptions.new('Error: config option use without [project|gemset|vendor] options')
         end
 
+        if options[:list] && options[:config].nil?
+          raise InvalidOptions.new('Option --list should be use with --config')
+        end
+
         if options[:project].nil? && options[:config].nil?
-          raise ProjectNotSet.new('You need to set project (--project <PATH_TO_PROJECT>) or use config')
+          raise ProjectNotSet.new('You need to set project (--project <PATH_TO_PROJECT>) or use --config')
         end
       end
 

@@ -5,7 +5,7 @@ describe Pumper::Configuration do
 
   context 'when raise error ProjectNotSet' do
     it { expect { subject }.to raise_error(Pumper::Configuration::ProjectNotSet) }
-    it { expect { subject }.to raise_exception('You need to set project (--project <PATH_TO_PROJECT>) or use config') }
+    it { expect { subject }.to raise_exception('You need to set project (--project <PATH_TO_PROJECT>) or use --config') }
   end
 
   context 'when valid project' do
@@ -14,10 +14,18 @@ describe Pumper::Configuration do
     it { is_expected.to eq([ options ]) }
   end
 
-  context 'when raise error InvalidOptions' do
-    let(:options) { { project: 'cashier', config: true, gemset: 'ruby-2.1.0' } }
+  context 'raise error InvalidOptions' do
+    context 'when set project and config options' do
+      let(:options) { { project: 'cashier', config: true, gemset: 'ruby-2.1.0' } }
 
-    it { expect { subject }.to raise_error(Pumper::Configuration::InvalidOptions) }
+      it { expect { subject }.to raise_exception('Error: config option use without [project|gemset|vendor] options') }
+    end
+
+    context 'when list option without config' do
+      let(:options) { { list: ['cashier'] } }
+
+      it { expect { subject }.to raise_exception('Option --list should be use with --config') }
+    end
   end
 
   context 'when --config' do
