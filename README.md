@@ -67,9 +67,10 @@ Success bump current gem
 ------------------------- |:-----------------------------------------------------------
  `--project`              | Path to ruby project where &lt;your_gem> needs update
  `--absolute_path`        | If project path is absolute
- `--gemset`               | Gemset name (if you use RVM)
- `--vendor`               | If project gems stored in the vendor/cache
+ `--gemset`               | Gemset's name (if you use RVM)
+ `--vendor`               | If project's gems stored in the vendor/cache
  `--config`               | If you want to use special config for updating project
+ `--list`                 | Select projects from `.pumper.yml` (use with --config)
 
 
 Example:
@@ -97,10 +98,19 @@ projects:
     absolute_path: true
     gemset: ruby-2.1.0
     vendor: true
+  another_project:
+    path: /Users/admin/Projects/another_project
+
 ```
 
 and run
 
 ```sh
 $ pumper --config
+=>
+# Update all (rails_project, another_project)
+
+$ pumper --config --list rails_project
+=>
+# Update only rails_project
 ```

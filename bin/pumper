@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 require 'optparse'
 require 'pumper'
-
 options = Hash.new
 
 opts = OptionParser.new do |opts|
@@ -15,24 +14,34 @@ opts = OptionParser.new do |opts|
     options[:is_absolute_path] = true
   end
 
-  opts.on('-c', '--config', 'If use .pumper.yml config') do
-    options[:config] = true
-  end
-
-  opts.on('-g', '--gemset GEMSET', 'Gemset name (if you use rvm)') do |gemset|
+  opts.on('-g', '--gemset GEMSET', "Gemset's name (if you use rvm)") do |gemset|
     options[:gemset] = gemset
   end
 
-  opts.on('-e', '--vendor', 'If project gems stored in the vendor/cache') do
+  opts.on('-e', '--vendor', "If project's gems stored in the vendor/cache") do
     options[:is_vendor] = true
+  end
+
+  opts.on('-c', '--config', 'If you use .pumper.yml config') do
+    options[:config] = true
+  end
+
+  opts.on('-l', '--list projectN[,projectN+1]', Array, 'List of projects (use with --config)') do |list|
+    options[:list] = list
+  end
+
+  opts.on_tail('-h', '--help', 'Show this message') do
+    puts opts
+    exit
+  end
+
+  opts.on_tail('--version', 'Show version') do
+    puts Pumper::VERSION
+    exit
   end
 end
 
 opts.parse!
 config_options = Pumper::Configuration.configure!(options)
 
-if options[:config]
-  config_options.each { |options| Pumper::Pump.new(options).perform }
-else
-  Pumper::Pump.new(config_options).perform
-end
+config_options.each { |options| Pumper::Pump.new(options).perform }
