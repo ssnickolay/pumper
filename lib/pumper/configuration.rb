@@ -19,11 +19,11 @@ module Pumper
 
       def validate(options)
         if options[:config] && (options[:project] || options[:gemset] || options[:vendor])
-          raise InvalidOptions.new('Error: config option use without [project|gemset|vendor] options')
+          raise InvalidOptions.new('Error: config option must be used without [project|gemset|vendor] options')
         end
 
         if options[:list] && options[:config].nil?
-          raise InvalidOptions.new('Option --list should be use with --config')
+          raise InvalidOptions.new('Option --list should be used with --config')
         end
 
         if options[:project].nil? && options[:config].nil?

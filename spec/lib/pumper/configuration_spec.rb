@@ -18,13 +18,13 @@ describe Pumper::Configuration do
     context 'when set project and config options' do
       let(:options) { { project: 'cashier', config: true, gemset: 'ruby-2.1.0' } }
 
-      it { expect { subject }.to raise_exception('Error: config option use without [project|gemset|vendor] options') }
+      it { expect { subject }.to raise_exception('Error: config option must be used without [project|gemset|vendor] options') }
     end
 
     context 'when list option without config' do
       let(:options) { { list: ['cashier'] } }
 
-      it { expect { subject }.to raise_exception('Option --list should be use with --config') }
+      it { expect { subject }.to raise_exception('Option --list should be used with --config') }
     end
   end
 

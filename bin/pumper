@@ -14,15 +14,15 @@ opts = OptionParser.new do |opts|
     options[:is_absolute_path] = true
   end
 
-  opts.on('-g', '--gemset GEMSET', 'Gemset name (if you use rvm)') do |gemset|
+  opts.on('-g', '--gemset GEMSET', "Gemset's name (if you use rvm)") do |gemset|
     options[:gemset] = gemset
   end
 
-  opts.on('-e', '--vendor', 'If project gems stored in the vendor/cache') do
+  opts.on('-e', '--vendor', "If project's gems stored in the vendor/cache") do
     options[:is_vendor] = true
   end
 
-  opts.on('-c', '--config', 'If use .pumper.yml config') do
+  opts.on('-c', '--config', 'If you use .pumper.yml config') do
     options[:config] = true
   end
 
